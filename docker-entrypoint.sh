@@ -2,7 +2,13 @@
 set -e
 
 # mysqld
-/usr/bin/mysqld_safe --user=mysql --defaults-file=/etc/my.cnf 
+(
+    sleep 3
+    /usr/local/bin/mysql-setup.sh
+) &
+
+# mysqld
+/usr/bin/mysqld_safe
 
 # exec commands
 exec "$@"
