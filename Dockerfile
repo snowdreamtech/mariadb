@@ -12,6 +12,8 @@ RUN apk add --no-cache mariadb=${MARIADB_VERSION} \
     mariadb-client=${MARIADB_VERSION} \
     expect
 
+COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+
 EXPOSE 3306
 
 COPY docker-entrypoint.sh mysql-setup.sh /usr/local/bin/
