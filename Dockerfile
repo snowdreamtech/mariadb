@@ -16,6 +16,6 @@ COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 EXPOSE 3306
 
-COPY docker-entrypoint.sh mysql-setup.sh /usr/local/bin/
+COPY docker-entrypoint.sh mariadb-setup.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]

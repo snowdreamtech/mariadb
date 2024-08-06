@@ -4,7 +4,7 @@ set -e
 # mysqld
 (
     sleep 3
-    /usr/local/bin/mysql-setup.sh
+    /usr/local/bin/mariadb-setup.sh
 ) &
 
 # mysqld
