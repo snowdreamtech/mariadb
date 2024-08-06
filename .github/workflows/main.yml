@@ -66,11 +66,18 @@ jobs:
             push: true
             tags: |
               snowdreamtech/mariadb:latest
-              snowdreamtech/mariadb:3.20.2
-              snowdreamtech/mariadb:3.20
-              snowdreamtech/mariadb:3
+              snowdreamtech/mariadb:10.11.8
+              snowdreamtech/mariadb:10.11
+              snowdreamtech/mariadb:10
+              snowdreamtech/mysql:latest
+              snowdreamtech/mysql:10.11.8
+              snowdreamtech/mysql:10.11
+              snowdreamtech/mysql:10
               ghcr.io/snowdreamtech/mariadb:latest
-              ghcr.io/snowdreamtech/mariadb:3.20.2
-              ghcr.io/snowdreamtech/mariadb:3.20
-              ghcr.io/snowdreamtech/mariadb:3
-             
+              ghcr.io/snowdreamtech/mariadb:10.11.8
+              ghcr.io/snowdreamtech/mariadb:10.11
+              ghcr.io/snowdreamtech/mariadb:10
+              ghcr.io/snowdreamtech/mysql:latest
+              ghcr.io/snowdreamtech/mysql:10.11.8
+              ghcr.io/snowdreamtech/mysql:10.11
+              ghcr.io/snowdreamtech/mysql:10
