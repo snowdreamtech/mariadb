@@ -16,6 +16,8 @@ To help you get started creating a container from this image you can either use 
 docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
+  -e MARIADB_ROOT_PASSWORD="password" \
+  -p 3306:3306 \
   --restart unless-stopped \
   snowdreamtech/mariadb:latest
 ```
@@ -26,7 +28,10 @@ docker run -d \
 docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
-  -v /path/to/data:/path/to/data \
+  -e MARIADB_ROOT_PASSWORD="password" \
+  -e MARIADB_PORT=3306 \
+  -p 3306:3306 \
+  -v /path/to/data:/var/lib/mysql \
   --restart unless-stopped \
   snowdreamtech/mariadb:latest
 ```
@@ -44,6 +49,9 @@ services:
     container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
+      - MARIADB_ROOT_PASSWORD="password"
+    ports:
+      - 3306:3306
     restart: unless-stopped
 ```
 
@@ -58,8 +66,12 @@ services:
     container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
+      - MARIADB_ROOT_PASSWORD="password"
+      - MARIADB_PORT=3306
     volumes:
-      - /path/to/data:/path/to/data
+      - /path/to/data:/var/lib/mysql
+    ports:
+      - 3306:3306           
     restart: unless-stopped
 ```
 
