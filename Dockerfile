@@ -10,8 +10,7 @@ ENV MARIADB_VERSION=10.11.8-r0 \
 
 RUN apk add --no-cache mariadb=${MARIADB_VERSION} \
     mariadb-client=${MARIADB_VERSION} \
-    expect \
-    && mysql_install_db --user=mysql --datadir=/var/lib/mysql
+    expect
 
 EXPOSE 3306
 
