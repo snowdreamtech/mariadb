@@ -3,6 +3,7 @@ FROM snowdreamtech/alpine:3.20.2
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
 ENV MARIADB_VERSION=10.11.8-r0 \
+    MARIADB_PORT=3306 \
     MARIADB_ROOT_PASSWORD="" \
     REMOVE_ANONYMOUS_USERS=1 \
     DISALLOW_ROOT_LOGIN_REMOTELY=1 \
