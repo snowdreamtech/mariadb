@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 set timeout -1
-spawn mysql_secure_installation
+spawn mariadb-secure-installation
 expect "Enter current password for root (enter for none):"
 send "\r"
 expect "Switch to unix_socket authentication"
