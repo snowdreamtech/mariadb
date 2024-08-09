@@ -1,0 +1,80 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+
+spawn mariadb-custom-installation
+
+expect "Enter current password for root (enter for none):"
+send "\r"
+
+expect "Switch to unix_socket authentication"
+send "n\r"
+
+expect "Change the root password?"
+if { $env(MARIADB_ROOT_PASSWORD) != "" } {
+    send "Y\r"
+
+    expect "New password:"
+    send "$env(MARIADB_ROOT_PASSWORD)\r"
+    expect "Re-enter new password:"
+    send "$env(MARIADB_ROOT_PASSWORD)\r"
+} else {
+    send "n\r"
+}
+
+expect "Remove anonymous users?"
+if { $env(REMOVE_ANONYMOUS_USERS) == 1 } {
+    send "Y\r"
+} else {
+    send "n\r"
+}
+
+expect "Disallow root login remotely?"
+if { $env(DISALLOW_ROOT_LOGIN_REMOTELY) == 1 } {
+    send "Y\r"
+} else {
+    send "n\r"
+}
+
+expect "Remove test database and access to it?"
+if { $env(REMOVE_TEST_DATABASE) == 1 } {
+    send "Y\r"
+} else {
+    send "n\r"
+}
+
+expect "Add a database?"
+if { $env(MARIADB_DATABASE) != "" } {
+    send "Y\r"
+
+    expect "New database:"
+    send "$env(MARIADB_DATABASE)\r"
+} else {
+    send "n\r"
+}
+
+expect "Add a user?"
+if { $env(MARIADB_USER) != "" && $env(MARIADB_PASSWORD) != "" } {
+    send "Y\r"
+
+    expect "New user:"
+    send "$env(MARIADB_USER)\r"
+    expect "New password:"
+    send "$env(MARIADB_PASSWORD)\r"
+    expect "Re-enter new password:"
+    send "$env(MARIADB_PASSWORD)\r"
+} else {
+    send "n\r"
+}
+
+expect "Disallow user login remotely?"
+if { $env(DISALLOW_USER_LOGIN_REMOTELY) == 1 } {
+    send "Y\r"
+} else {
+    send "n\r"
+}
+
+expect "Reload privilege tables now?"
+send "Y\r"
+
+expect eof
