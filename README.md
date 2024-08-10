@@ -17,6 +17,7 @@ docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
   -e MARIADB_ROOT_PASSWORD="password" \
+  -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
   -p 3306:3306 \
   --restart unless-stopped \
   snowdreamtech/mariadb:latest
@@ -29,6 +30,11 @@ docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
   -e MARIADB_ROOT_PASSWORD="password" \
+  -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
+  -e MARIADB_DATABASE="testdb" \
+  -e MARIADB_USER="testuser" \
+  -e MARIADB_PASSWORD="testuserpass" \
+  -e DISALLOW_USER_LOGIN_REMOTELY=0 \
   -e MARIADB_PORT=3306 \
   -p 3306:3306 \
   -v /path/to/data:/var/lib/mysql \
@@ -50,6 +56,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - MARIADB_ROOT_PASSWORD="password"
+      - DISALLOW_ROOT_LOGIN_REMOTELY=0
     ports:
       - 3306:3306
     restart: unless-stopped
@@ -67,6 +74,11 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - MARIADB_ROOT_PASSWORD="password"
+      - DISALLOW_ROOT_LOGIN_REMOTELY=0
+      - MARIADB_DATABASE="testdb"
+      - MARIADB_USER="testuser"
+      - MARIADB_PASSWORD="testuserpass"
+      - DISALLOW_USER_LOGIN_REMOTELY=0
       - MARIADB_PORT=3306
     volumes:
       - /path/to/data:/var/lib/mysql
