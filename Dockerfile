@@ -2,7 +2,7 @@ FROM snowdreamtech/alpine:3.20.2
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
-ENV MARIADB_VERSION=10.11.8-r0 \
+ENV MARIADB_VERSION=10.11.10-r0 \
     MARIADB_PORT=3306 \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_DATABASE="" \
