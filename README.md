@@ -1,8 +1,8 @@
-# Base
+# MariaDB
 
-[![Base](http://dockeri.co/image/snowdreamtech/base)](https://hub.docker.com/r/snowdreamtech/base)
+[![MariaDB](http://dockeri.co/image/snowdreamtech/mariadb)](https://hub.docker.com/r/snowdreamtech/mariadb)
 
-Docker Image packaging for Base. (amd64, arm32v5,  arm32v6, arm32v7, arm64v8, i386, mips64le, ppc64le,riscv64, s390x)
+Docker Image packaging for MariaDB. (amd64, arm32v5,  arm32v6, arm32v7, arm64v8, i386, mips64le, ppc64le,riscv64, s390x)
 
 # Usage
 
@@ -14,21 +14,32 @@ To help you get started creating a container from this image you can either use 
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
   -e TZ=Asia/Shanghai \
+  -e MARIADB_ROOT_PASSWORD="password" \
+  -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
+  -p 3306:3306 \
   --restart unless-stopped \
-  snowdreamtech/base:latest
+  snowdreamtech/mariadb:latest
 ```
 
 ### Advance
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
   -e TZ=Asia/Shanghai \
-  -v /path/to/data:/path/to/data \
+  -e MARIADB_ROOT_PASSWORD="password" \
+  -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
+  -e MARIADB_DATAmariadb="testdb" \
+  -e MARIADB_USER="testuser" \
+  -e MARIADB_PASSWORD="testuserpass" \
+  -e DISALLOW_USER_LOGIN_REMOTELY=0 \
+  -e MARIADB_PORT=3306 \
+  -p 3306:3306 \
+  -v /path/to/data:/var/lib/mysql \
   --restart unless-stopped \
-  snowdreamtech/base:latest
+  snowdreamtech/mariadb:latest
 ```
 
 ## Docker Compose
@@ -36,26 +47,43 @@ docker run -d \
 ### Simple
 
 ```bash
+version: "3"
+
 services:
-  base:
-    image: snowdreamtech/base:latest
-    container_name: base
+  mariadb:
+    image: snowdreamtech/mariadb:latest
+    container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
+      - MARIADB_ROOT_PASSWORD="password"
+      - DISALLOW_ROOT_LOGIN_REMOTELY=0
+    ports:
+      - 3306:3306
     restart: unless-stopped
 ```
 
 ### Advance
 
 ```bash
+version: "3"
+
 services:
-  base:
-    image: snowdreamtech/base:latest
-    container_name: base
+  mariadb:
+    image: snowdreamtech/mariadb:latest
+    container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
+      - MARIADB_ROOT_PASSWORD="password"
+      - DISALLOW_ROOT_LOGIN_REMOTELY=0
+      - MARIADB_DATAmariadb="testdb"
+      - MARIADB_USER="testuser"
+      - MARIADB_PASSWORD="testuserpass"
+      - DISALLOW_USER_LOGIN_REMOTELY=0
+      - MARIADB_PORT=3306
     volumes:
-      - /path/to/data:/path/to/data
+      - /path/to/data:/var/lib/mysql
+    ports:
+      - 3306:3306           
     restart: unless-stopped
 ```
 
@@ -63,7 +91,7 @@ services:
 
 ```bash
 docker buildx create --use --name build --node build --driver-opt network=host
-docker buildx build -t snowdreamtech/base --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x . --push
+docker buildx build -t snowdreamtech/mariadb --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x . --push
 ```
 
 ## Reference
@@ -75,7 +103,7 @@ docker buildx build -t snowdreamtech/base --platform=linux/386,linux/amd64,linux
 1. [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
 1. [docker/buildx](https://github.com/docker/buildx)
 
-## Contact (备注：base)
+## Contact (备注：mariadb)
 
 * Email: sn0wdr1am@qq.com
 * QQ: 3217680847
