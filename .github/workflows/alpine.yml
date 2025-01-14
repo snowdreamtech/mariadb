@@ -109,9 +109,12 @@ jobs:
         uses: docker/metadata-action@v5.6.1
         with:
           images: |
-            name=snowdreamtech/base,enable=true
-            name=ghcr.io/snowdreamtech/base,enable=true
-            name=quay.io/snowdreamtech/base,enable=true
+            name=snowdreamtech/mariadb,enable=true
+            name=ghcr.io/snowdreamtech/mariadb,enable=true
+            name=quay.io/snowdreamtech/mariadb,enable=true
+            name=snowdreamtech/mysql,enable=true
+            name=ghcr.io/snowdreamtech/mysql,enable=true
+            name=quay.io/snowdreamtech/mysql,enable=true
           flavor: |
             latest=false  
             prefix=
