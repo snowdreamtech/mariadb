@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/mariadb" \
     org.opencontainers.image.vendor="Snowdream Tech" \
-    org.opencontainers.image.version="10.11.6" \
+    org.opencontainers.image.version="10.11.11" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/mariadb"
     
 # Switch to the user
@@ -24,7 +24,7 @@ ENV KEEPALIVE=1 \
     # which are port numbers less than 1024. 
     CAP_NET_BIND_SERVICE=0
 
-ENV MARIADB_VERSION=1:10.11.6-0+deb12u1 \
+ENV MARIADB_VERSION=1:10.11.11-0+deb12u1 \
     MARIADB_PORT=3306 \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_DATABASE="" \
