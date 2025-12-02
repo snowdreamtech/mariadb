@@ -19,7 +19,7 @@ To help you get started creating a container from this image you can either use 
 docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
-  -e MARIADB_ROOT_PASSWORD="password" \
+  -e MARIADB_ROOT_PWD="password" \
   -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
   -p 3306:3306 \
   --restart unless-stopped \
@@ -32,11 +32,11 @@ docker run -d \
 docker run -d \
   --name=mariadb \
   -e TZ=Asia/Shanghai \
-  -e MARIADB_ROOT_PASSWORD="password" \
+  -e MARIADB_ROOT_PWD="password" \
   -e DISALLOW_ROOT_LOGIN_REMOTELY=0 \
   -e MARIADB_DATAmariadb="testdb" \
   -e MARIADB_USER="testuser" \
-  -e MARIADB_PASSWORD="testuserpass" \
+  -e MARIADB_PWD="testuserpass" \
   -e DISALLOW_USER_LOGIN_REMOTELY=0 \
   -e MARIADB_PORT=3306 \
   -p 3306:3306 \
@@ -58,7 +58,7 @@ services:
     container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
-      - MARIADB_ROOT_PASSWORD="password"
+      - MARIADB_ROOT_PWD="password"
       - DISALLOW_ROOT_LOGIN_REMOTELY=0
     ports:
       - 3306:3306
@@ -76,11 +76,11 @@ services:
     container_name: mariadb
     environment:
       - TZ=Asia/Shanghai
-      - MARIADB_ROOT_PASSWORD="password"
+      - MARIADB_ROOT_PWD="password"
       - DISALLOW_ROOT_LOGIN_REMOTELY=0
       - MARIADB_DATAmariadb="testdb"
       - MARIADB_USER="testuser"
-      - MARIADB_PASSWORD="testuserpass"
+      - MARIADB_PWD="testuserpass"
       - DISALLOW_USER_LOGIN_REMOTELY=0
       - MARIADB_PORT=3306
     volumes:

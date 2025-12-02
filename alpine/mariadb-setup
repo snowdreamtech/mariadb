@@ -11,13 +11,13 @@ expect "Switch to unix_socket authentication"
 send "n\r"
 
 expect "Change the root password?"
-if { $env(MARIADB_ROOT_PASSWORD) != "" } {
+if { $env(MARIADB_ROOT_PWD) != "" } {
     send "Y\r"
 
     expect "New password:"
-    send "$env(MARIADB_ROOT_PASSWORD)\r"
+    send "$env(MARIADB_ROOT_PWD)\r"
     expect "Re-enter new password:"
-    send "$env(MARIADB_ROOT_PASSWORD)\r"
+    send "$env(MARIADB_ROOT_PWD)\r"
 } else {
     send "n\r"
 }
@@ -54,15 +54,15 @@ if { $env(MARIADB_DATABASE) != "" } {
 }
 
 expect "Add a user?"
-if { $env(MARIADB_USER) != "" && $env(MARIADB_PASSWORD) != "" } {
+if { $env(MARIADB_USER) != "" && $env(MARIADB_PWD) != "" } {
     send "Y\r"
 
     expect "New user:"
     send "$env(MARIADB_USER)\r"
     expect "New password:"
-    send "$env(MARIADB_PASSWORD)\r"
+    send "$env(MARIADB_PWD)\r"
     expect "Re-enter new password:"
-    send "$env(MARIADB_PASSWORD)\r"
+    send "$env(MARIADB_PWD)\r"
 } else {
     send "n\r"
 }

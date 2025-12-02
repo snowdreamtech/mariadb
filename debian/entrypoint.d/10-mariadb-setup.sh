@@ -4,10 +4,10 @@ set -e
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Setting up mariadb..."; fi
 
 # openssl rand -base64 33
-if [ -z "${MARIADB_ROOT_PASSWORD}" ]; then
+if [ -z "${MARIADB_ROOT_PWD}" ]; then
     {
-        MARIADB_ROOT_PASSWORD=$(openssl rand -base64 33)
-        echo "Generate Random mariadb root password:    ${MARIADB_ROOT_PASSWORD}"
+        MARIADB_ROOT_PWD=$(openssl rand -base64 33)
+        echo "Generate Random mariadb root password:    ${MARIADB_ROOT_PWD}"
     }
 fi
 
