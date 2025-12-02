@@ -23,7 +23,7 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_PASS: ${{ secrets.DOCKER_HUB_TOKEN }}
         with:
-          destination_container_repo: snowdreamtech/base
+          destination_container_repo: snowdreamtech/mariadb
           provider: dockerhub
           short_description: ${{ github.event.repository.description }}
           readme_file: "README.md"
@@ -32,6 +32,24 @@ jobs:
       #   env:
       #     DOCKER_APIKEY: ${{ secrets.QUAY_API_TOKEN }}
       #   with:
-      #     destination_container_repo: quay.io/snowdreamtech/base
+      #     destination_container_repo: quay.io/snowdreamtech/mariadb
+      #     provider: quay
+      #     readme_file: "README.md"
+      - name: Docker Hub Description
+        uses: christian-korneck/update-container-description-action@v1
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_PASS: ${{ secrets.DOCKER_HUB_TOKEN }}
+        with:
+          destination_container_repo: snowdreamtech/mysql
+          provider: dockerhub
+          short_description: ${{ github.event.repository.description }}
+          readme_file: "README.md"
+      # - name: Quay.io Description
+      #   uses: christian-korneck/update-container-description-action@v1
+      #   env:
+      #     DOCKER_APIKEY: ${{ secrets.QUAY_API_TOKEN }}
+      #   with:
+      #     destination_container_repo: quay.io/snowdreamtech/mysql
       #     provider: quay
       #     readme_file: "README.md"
