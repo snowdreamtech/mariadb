@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
+
 # mysqld
 mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
@@ -12,3 +14,5 @@ until [ "$(/usr/bin/mariadb-admin -h localhost -u root -p${MARIADB_ROOT_PASSWORD
 done
 
 /usr/local/bin/mariadb-setup
+
+if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Mariadb started."; fi

@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 
+if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Setting up mariadb..."; fi
 
 # openssl rand -base64 33
 if [ -z "${MARIADB_ROOT_PASSWORD}" ]; then
@@ -34,3 +35,5 @@ character_set_server = utf8mb4
 [mysql]
 default-character-set = utf8mb4
 EOF
+
+if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Mariadb has been set up."; fi    
