@@ -12,9 +12,9 @@ if [ -z "${MARIADB_ROOT_PWD}" ]; then
 fi
 
 # Modifying configuration file mariadb-server.cnf
-# https://wiki.alpinelinux.org/wiki/MySQL
+# https://wiki.alpinelinux.org/wiki/MariaDB
 sed -i "s|port\s*=\s*.+|port = ${MARIADB_PORT}|g" /etc/my.cnf.d/mariadb-server.cnf
-# sed -i "s|\#*bind-address\s*=.*|bind_address = 127.0.0.1,::1,db,mysql,mariadb|g" /etc/my.cnf.d/mariadb-server.cnf
+# sed -i "s|\#*bind-address\s*=.*|bind_address = 127.0.0.1,::1,db,mariadb|g" /etc/my.cnf.d/mariadb-server.cnf
 if [ "${DISALLOW_ROOT_LOGIN_REMOTELY}" -eq 0 ] || [ "${DISALLOW_USER_LOGIN_REMOTELY}" -eq 0 ] ; then
     sed -i "s|\#*bind-address\s*=.*|bind_address = 0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 fi

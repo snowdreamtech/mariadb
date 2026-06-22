@@ -3,7 +3,7 @@ set -e
 
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
 
-# mysqld
+# mariadbd
 mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
 /usr/bin/mariadbd-safe --datadir='/var/lib/mysql' >/dev/null 2>&1 &

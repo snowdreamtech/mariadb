@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1335  USA
 
 config=".my.cnf.$$"
-command=".mysql.$$"
+command=".mariadb.$$"
 output=".my.output.$$"
 
 trap "interrupt" 1 2 3 6 15
@@ -34,7 +34,7 @@ defaults_group_suffix=
 no_defaults=
 
 case "$0" in
-  *mysql_secure_installation)
+  *mariadb_secure_installation)
     echo "$0: Deprecated program name. It will be removed in a future release, use 'mariadb-secure-installation' instead" 1>&2
     ;;
 esac
@@ -170,15 +170,15 @@ then
     cannot_find_file my_print_defaults $basedir/bin $basedir/extra
     exit 1
   fi
-  mysql_command=`find_in_basedir mariadb bin`
-  if test -z "$mysql_command"
+  mariadb_command=`find_in_basedir mariadb bin`
+  if test -z "$mariadb_command"
   then
       cannot_find_file mariadb $basedir/bin
       exit 1
   fi
 else
   print_defaults="/usr/bin/my_print_defaults"
-  mysql_command="/usr/bin/mariadb"
+  mariadb_command="/usr/bin/mariadb"
 fi
 
 if test ! -x "$print_defaults"
@@ -187,9 +187,9 @@ then
   exit 1
 fi
 
-if test ! -x "$mysql_command"
+if test ! -x "$mariadb_command"
 then
-  cannot_find_file "$mysql_command"
+  cannot_find_file "$mariadb_command"
   exit 1
 fi
 
@@ -228,7 +228,7 @@ prepare() {
 do_query() {
     echo "$1" >$command
     #sed 's,^,> ,' < $command  # Debugging
-    $mysql_command --defaults-file=$config $defaults_extra_file $no_defaults $args <$command >$output
+    $mariadb_command --defaults-file=$config $defaults_extra_file $no_defaults $args <$command >$output
     return $?
 }
 
@@ -253,7 +253,7 @@ basic_single_escape () {
 }
 
 #
-# create a simple my.cnf file to be able to pass the root password to the mysql
+# create a simple my.cnf file to be able to pass the root password to the mariadb
 # client without putting it on the command line
 #
 make_config() {
