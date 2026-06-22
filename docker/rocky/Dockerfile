@@ -62,8 +62,6 @@ RUN set -eux \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
 
-EXPOSE 3306
-
 # Container Orchestration Files
 COPY mariadb-custom-installation /usr/local/bin/mariadb-custom-installation
 COPY mariadb-setup /usr/local/bin/mariadb-setup
@@ -77,6 +75,7 @@ RUN chmod +x /usr/local/bin/mariadb-custom-installation \
 HEALTHCHECK NONE
 
 # Process Execution
+EXPOSE 3306
 USER root
 WORKDIR /root
 ENTRYPOINT ["docker-entrypoint.sh"]
