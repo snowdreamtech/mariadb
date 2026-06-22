@@ -53,6 +53,8 @@ ENV KEEPALIVE=${KEEPALIVE} \
 RUN set -eux \
     && dnf -y --allowerasing update \
     && dnf -y --allowerasing install \
+    expect \
+    openssl \
     mariadb11.8-server-${MARIADB_VERSION} \
     && dnf -y --allowerasing autoremove \
     && dnf -y --allowerasing clean all \
@@ -63,9 +65,13 @@ RUN set -eux \
 EXPOSE 3306
 
 # Container Orchestration Files
+COPY mariadb-custom-installation /usr/local/bin/mariadb-custom-installation
+COPY mariadb-setup /usr/local/bin/mariadb-setup
 COPY entrypoint.d /usr/local/bin/entrypoint.d
 
-RUN chmod +x /usr/local/bin/entrypoint.d/*
+RUN chmod +x /usr/local/bin/mariadb-custom-installation \
+    && chmod +x /usr/local/bin/mariadb-setup \
+    && chmod +x /usr/local/bin/entrypoint.d/*
 
 # Standard Healthcheck (Verification of core system responsiveness)
 HEALTHCHECK NONE

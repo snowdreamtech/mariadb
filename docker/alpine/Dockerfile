@@ -52,15 +52,21 @@ ENV KEEPALIVE=${KEEPALIVE} \
 # Additional tooling and configuration for MariaDB image
 RUN apk update \
     && apk add --no-cache \
+    expect \
+    openssl \
     mariadb=~${MARIADB_VERSION} \
     mariadb-client=~${MARIADB_VERSION}
 
 EXPOSE 3306
 
 # Container Orchestration Files
+COPY mariadb-custom-installation /usr/local/bin/mariadb-custom-installation
+COPY mariadb-setup /usr/local/bin/mariadb-setup
 COPY entrypoint.d /usr/local/bin/entrypoint.d
 
-RUN chmod +x /usr/local/bin/entrypoint.d/*
+RUN chmod +x /usr/local/bin/mariadb-custom-installation \
+    && chmod +x /usr/local/bin/mariadb-setup \
+    && chmod +x /usr/local/bin/entrypoint.d/*
 
 # Standard Healthcheck (Verification of core system responsiveness)
 HEALTHCHECK NONE

@@ -55,6 +55,8 @@ ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \
 RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy update \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends \
+    expect \
+    openssl \
     mariadb-server=${MARIADB_VERSION} \
     mariadb-client=${MARIADB_VERSION} \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy --purge autoremove \
@@ -66,9 +68,13 @@ RUN set -eux \
 EXPOSE 3306
 
 # Container Orchestration Files
+COPY mariadb-custom-installation /usr/local/bin/mariadb-custom-installation
+COPY mariadb-setup /usr/local/bin/mariadb-setup
 COPY entrypoint.d /usr/local/bin/entrypoint.d
 
-RUN chmod +x /usr/local/bin/entrypoint.d/*
+RUN chmod +x /usr/local/bin/mariadb-custom-installation \
+    && chmod +x /usr/local/bin/mariadb-setup \
+    && chmod +x /usr/local/bin/entrypoint.d/*
 
 # Standard Healthcheck (Verification of core system responsiveness)
 HEALTHCHECK NONE
