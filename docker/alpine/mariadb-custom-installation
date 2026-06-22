@@ -257,8 +257,8 @@ basic_single_escape () {
 # client without putting it on the command line
 #
 make_config() {
-    echo "# mysql_secure_installation config file" >$config
-    echo "[mysql]" >>$config
+    echo "# mariadb_secure_installation config file" >$config
+    echo "[mariadb-client]" >>$config
     echo "user=root" >>$config
     esc_pass=`basic_single_escape "$rootpass"`
     echo "password='$esc_pass'" >>$config

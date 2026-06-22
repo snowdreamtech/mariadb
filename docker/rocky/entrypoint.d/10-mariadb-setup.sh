@@ -25,14 +25,14 @@ sed -i "/\#*skip-networking/d" /etc/my.cnf.d/mariadb-server.cnf
 # but older versions (below Alpine v3.8)of the package does not have a charset section,
 # so you must added manually to the main configuration in each respective section:
 cat >/etc/my.cnf.d/mariadb-server-default-charset.cnf <<EOF
-[client]
+[client-mariadb]
 default-character-set = utf8mb4
 
-[mysqld]
+[mariadbd]
 collation_server = utf8mb4_unicode_ci
 character_set_server = utf8mb4
 
-[mysql]
+[mariadb-client]
 default-character-set = utf8mb4
 EOF
 
