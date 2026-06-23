@@ -3,6 +3,12 @@ set -e
 
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
 
+if [ -z "${MARIADB_ROOT_PWD}" ] && [ -f /tmp/mariadb_root_pwd ]; then
+  MARIADB_ROOT_PWD="$(cat /tmp/mariadb_root_pwd)"
+  export MARIADB_ROOT_PWD
+  rm -f /tmp/mariadb_root_pwd
+fi
+
 # mariadbd
 # Idempotency guard: skip re-initialization if the data directory is already
 # populated (e.g., when mounting an existing data volume).

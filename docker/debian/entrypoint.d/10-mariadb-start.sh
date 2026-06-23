@@ -3,6 +3,12 @@ set -e
 
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
 
+if [ -z "${MARIADB_ROOT_PWD}" ] && [ -f /tmp/mariadb_root_pwd ]; then
+  MARIADB_ROOT_PWD="$(cat /tmp/mariadb_root_pwd)"
+  export MARIADB_ROOT_PWD
+  rm -f /tmp/mariadb_root_pwd
+fi
+
 # mariadbd
 # Idempotency guard: Debian's mariadb-server package auto-initializes the
 # data directory during apt-get install (via postinst script). Skip re-init

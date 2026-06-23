@@ -8,6 +8,7 @@ if [ -z "${MARIADB_ROOT_PWD}" ]; then
   {
     MARIADB_ROOT_PWD="$(openssl rand -base64 33)"
     export MARIADB_ROOT_PWD
+    echo "${MARIADB_ROOT_PWD}" > /tmp/mariadb_root_pwd
     echo "Generate Random mariadb root password:    ${MARIADB_ROOT_PWD}"
   }
 fi
