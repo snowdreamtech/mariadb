@@ -12,6 +12,12 @@ if [ -z "${MARIADB_ROOT_PWD}" ]; then
   }
 fi
 
+# Ensure runtime directory exists with correct ownership.
+# Debian's postinst creates this at install time, but we add it here
+# explicitly for consistency and resilience across base image updates.
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
+
 # Modifying configuration file mariadb-server.cnf
 # https://wiki.alpinelinux.org/wiki/MariaDB
 sed -i "s|\#*\s*port\s*=\s*.*|port = ${MARIADB_PORT}|g" /etc/mysql/my.cnf
