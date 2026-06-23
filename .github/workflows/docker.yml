@@ -477,6 +477,7 @@ jobs:
               -e TZ=Asia/Shanghai \
               -e PUID=1000 \
               -e PGID=1000 \
+              -e KEEPALIVE=0 \
               "${tag}" \
               sh -c "
                 echo '  ✓ Entrypoint execution: OK' && \
