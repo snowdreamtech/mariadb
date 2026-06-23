@@ -12,6 +12,12 @@ if [ -z "${MARIADB_ROOT_PWD}" ]; then
   }
 fi
 
+# Create runtime directories that Alpine's OpenRC would normally provide.
+# Without OpenRC in Docker, /run/mysqld/ does not exist, causing mariadbd
+# to segfault when it tries to create its socket and PID files there.
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
+
 # Modifying configuration file mariadb-server.cnf
 # https://wiki.alpinelinux.org/wiki/MariaDB
 sed -i "s|port\s*=\s*.+|port = ${MARIADB_PORT}|g" /etc/my.cnf.d/mariadb-server.cnf
