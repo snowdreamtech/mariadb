@@ -7,11 +7,11 @@ spawn mariadb-custom-installation
 expect "Enter current password for root (enter for none):"
 send "\r"
 
-expect "Switch to unix_socket authentication"
+expect "unix_socket authentication"
 send "n\r"
 
-expect "Change the root password?"
-if { $env(MARIADB_ROOT_PWD) != "" } {
+expect "root password?"
+if { [info exists env(MARIADB_ROOT_PWD)] && $env(MARIADB_ROOT_PWD) != "" } {
     send "Y\r"
 
     expect "New password:"
@@ -23,28 +23,28 @@ if { $env(MARIADB_ROOT_PWD) != "" } {
 }
 
 expect "Remove anonymous users?"
-if { $env(REMOVE_ANONYMOUS_USERS) == 1 } {
+if { [info exists env(REMOVE_ANONYMOUS_USERS)] && $env(REMOVE_ANONYMOUS_USERS) == 1 } {
     send "Y\r"
 } else {
     send "n\r"
 }
 
 expect "Disallow root login remotely?"
-if { $env(DISALLOW_ROOT_LOGIN_REMOTELY) == 1 } {
+if { [info exists env(DISALLOW_ROOT_LOGIN_REMOTELY)] && $env(DISALLOW_ROOT_LOGIN_REMOTELY) == 1 } {
     send "Y\r"
 } else {
     send "n\r"
 }
 
 expect "Remove test database and access to it?"
-if { $env(REMOVE_TEST_DATABASE) == 1 } {
+if { [info exists env(REMOVE_TEST_DATABASE)] && $env(REMOVE_TEST_DATABASE) == 1 } {
     send "Y\r"
 } else {
     send "n\r"
 }
 
 expect "Add a database?"
-if { $env(MARIADB_DATABASE) != "" } {
+if { [info exists env(MARIADB_DATABASE)] && $env(MARIADB_DATABASE) != "" } {
     send "Y\r"
 
     expect "New database:"
@@ -54,7 +54,7 @@ if { $env(MARIADB_DATABASE) != "" } {
 }
 
 expect "Add a user?"
-if { $env(MARIADB_USER) != "" && $env(MARIADB_PWD) != "" } {
+if { [info exists env(MARIADB_USER)] && $env(MARIADB_USER) != "" && [info exists env(MARIADB_PWD)] && $env(MARIADB_PWD) != "" } {
     send "Y\r"
 
     expect "New user:"
@@ -68,7 +68,7 @@ if { $env(MARIADB_USER) != "" && $env(MARIADB_PWD) != "" } {
 }
 
 expect "Disallow user login remotely?"
-if { $env(DISALLOW_USER_LOGIN_REMOTELY) == 1 } {
+if { [info exists env(DISALLOW_USER_LOGIN_REMOTELY)] && $env(DISALLOW_USER_LOGIN_REMOTELY) == 1 } {
     send "Y\r"
 } else {
     send "n\r"
