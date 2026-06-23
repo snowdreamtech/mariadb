@@ -257,11 +257,12 @@ make_config() {
 get_root_password() {
   status=1
   while [ $status -eq 1 ]; do
-    stty -echo
+    # Only disable echo if running in an interactive terminal (TTY)
+    [ -t 0 ] && stty -echo
     echo $echo_n "Enter current password for root (enter for none): $echo_c"
     read -r password
     echo
-    stty echo
+    [ -t 0 ] && stty echo
     if [ "$password" = "" ]; then
       emptypass=1
     else
@@ -280,14 +281,15 @@ get_root_password() {
 }
 
 set_root_password() {
-  stty -echo
+  # Only disable echo if running in an interactive terminal (TTY)
+  [ -t 0 ] && stty -echo
   echo $echo_n "New password: $echo_c"
   read -r password1
   echo
   echo $echo_n "Re-enter new password: $echo_c"
   read -r password2
   echo
-  stty echo
+  [ -t 0 ] && stty echo
 
   if [ "$password1" != "$password2" ]; then
     echo "Sorry, passwords do not match."
@@ -395,14 +397,15 @@ add_user() {
   echo $echo_n "New user: $echo_c"
   read -r username
   echo
-  stty -echo
+  # Only disable echo if running in an interactive terminal (TTY)
+  [ -t 0 ] && stty -echo
   echo $echo_n "New password: $echo_c"
   read -r password1
   echo
   echo $echo_n "Re-enter new password: $echo_c"
   read -r password2
   echo
-  stty echo
+  [ -t 0 ] && stty echo
 
   if [ "$password1" != "$password2" ]; then
     echo "Sorry, passwords do not match."
@@ -473,7 +476,8 @@ interrupt() {
   echo "Aborting!"
   echo
   cleanup
-  stty echo
+  # Only restore echo if running in an interactive terminal (TTY)
+  [ -t 0 ] && stty echo
   exit 1
 }
 
