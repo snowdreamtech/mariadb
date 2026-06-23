@@ -4,7 +4,11 @@ set -e
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
 
 # mariadbd
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+# Idempotency guard: skip re-initialization if the data directory is already
+# populated (e.g., when mounting an existing data volume).
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+  mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+fi
 
 /usr/bin/mariadbd-safe --datadir='/var/lib/mysql' >/dev/null 2>&1 &
 
