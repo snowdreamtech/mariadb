@@ -4,7 +4,13 @@ set -e
 if [ "$DEBUG" = "true" ]; then echo "→ [mariadb] Starting mariadb..."; fi
 
 # mariadbd
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+# Idempotency guard: Debian's mariadb-server package auto-initializes the
+# data directory during apt-get install (via postinst script). Skip re-init
+# if the data directory is already populated to avoid 'mysql.user table
+# already exists!' warnings.
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+  mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+fi
 
 /usr/bin/mariadbd-safe --datadir='/var/lib/mysql' >/dev/null 2>&1 &
 
