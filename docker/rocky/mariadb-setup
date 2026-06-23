@@ -5,76 +5,76 @@ set timeout -1
 spawn mariadb-custom-installation
 
 expect "Enter current password for root (enter for none):"
-send "\r"
+send "\n"
 
 expect "unix_socket authentication"
-send "n\r"
+send "n\n"
 
 expect "root password?"
 if { [info exists env(MARIADB_ROOT_PWD)] && $env(MARIADB_ROOT_PWD) != "" } {
-    send "Y\r"
+    send "Y\n"
 
     expect "New password:"
-    send "$env(MARIADB_ROOT_PWD)\r"
+    send "$env(MARIADB_ROOT_PWD)\n"
     expect "Re-enter new password:"
-    send "$env(MARIADB_ROOT_PWD)\r"
+    send "$env(MARIADB_ROOT_PWD)\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Remove anonymous users?"
 if { [info exists env(REMOVE_ANONYMOUS_USERS)] && $env(REMOVE_ANONYMOUS_USERS) == 1 } {
-    send "Y\r"
+    send "Y\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Disallow root login remotely?"
 if { [info exists env(DISALLOW_ROOT_LOGIN_REMOTELY)] && $env(DISALLOW_ROOT_LOGIN_REMOTELY) == 1 } {
-    send "Y\r"
+    send "Y\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Remove test database and access to it?"
 if { [info exists env(REMOVE_TEST_DATABASE)] && $env(REMOVE_TEST_DATABASE) == 1 } {
-    send "Y\r"
+    send "Y\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Add a database?"
 if { [info exists env(MARIADB_DATABASE)] && $env(MARIADB_DATABASE) != "" } {
-    send "Y\r"
+    send "Y\n"
 
     expect "New database:"
-    send "$env(MARIADB_DATABASE)\r"
+    send "$env(MARIADB_DATABASE)\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Add a user?"
 if { [info exists env(MARIADB_USER)] && $env(MARIADB_USER) != "" && [info exists env(MARIADB_PWD)] && $env(MARIADB_PWD) != "" } {
-    send "Y\r"
+    send "Y\n"
 
     expect "New user:"
-    send "$env(MARIADB_USER)\r"
+    send "$env(MARIADB_USER)\n"
     expect "New password:"
-    send "$env(MARIADB_PWD)\r"
+    send "$env(MARIADB_PWD)\n"
     expect "Re-enter new password:"
-    send "$env(MARIADB_PWD)\r"
+    send "$env(MARIADB_PWD)\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Disallow user login remotely?"
 if { [info exists env(DISALLOW_USER_LOGIN_REMOTELY)] && $env(DISALLOW_USER_LOGIN_REMOTELY) == 1 } {
-    send "Y\r"
+    send "Y\n"
 } else {
-    send "n\r"
+    send "n\n"
 }
 
 expect "Reload privilege tables now?"
-send "Y\r"
+send "Y\n"
 
 expect eof
