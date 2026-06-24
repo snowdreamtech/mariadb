@@ -212,6 +212,7 @@ prepare() {
 do_query() {
   echo "$1" >$command
   #sed 's,^,> ,' < $command  # Debugging
+  # shellcheck disable=SC2086
   $mariadb_command --defaults-file="$config" $defaults_extra_file $no_defaults $args <"$command" >"$output"
   return $?
 }
