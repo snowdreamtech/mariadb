@@ -1,7 +1,7 @@
 # MariaDB Image (Alpine Variant)
 # Extends snowdreamtech/alpine with additional tooling and configuration.
 
-FROM snowdreamtech/alpine:3.24.0
+FROM snowdreamtech/alpine:3.24.1
 
 # Build-time Configuration
 ARG BUILDTIME \
@@ -24,17 +24,14 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.title="MariaDB Image Based On Alpine" \
     org.opencontainers.image.description="Docker Images for MariaDB on Alpine. (i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x)" \
     org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/mariadb" \
-    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.0" \
+    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.1" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/mariadb" \
     org.opencontainers.image.vendor="Snowdream Tech" \
+    org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/mariadb"
-
-# x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-11.8.8}"
-# x-release-please-end
 
 # Runtime Environment Configuration
 ENV KEEPALIVE=${KEEPALIVE} \

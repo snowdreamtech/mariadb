@@ -17,7 +17,7 @@ ARG BUILDTIME \
     PUID=0 \
     USER=root \
     WORKDIR=/root \
-    MARIADB_VERSION=11.8.6-2.el10_2
+    MARIADB_VERSION=11.8.8-1.el10_2
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -28,13 +28,10 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/mariadb" \
     org.opencontainers.image.vendor="Snowdream Tech" \
+    org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/mariadb"
-
-# x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-11.8.6}"
-# x-release-please-end
 
 # Runtime Environment Configuration
 ENV KEEPALIVE=${KEEPALIVE} \
@@ -51,8 +48,8 @@ ENV KEEPALIVE=${KEEPALIVE} \
 
 # Additional tooling and configuration for MariaDB image
 RUN set -eux \
-    && dnf -y --allowerasing update \
-    && dnf -y --allowerasing install \
+    && dnf -y --allowerasing --setopt=*.skip_if_unavailable=true update \
+    && dnf -y --allowerasing --setopt=*.skip_if_unavailable=true install \
     expect \
     openssl \
     mariadb11.8-server-${MARIADB_VERSION} \
