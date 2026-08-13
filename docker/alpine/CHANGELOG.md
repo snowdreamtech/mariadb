@@ -23,14 +23,3 @@
 * smart merge upstream/dev into dev and update MariaDB package versions ([25b01dd](https://github.com/snowdreamtech/mariadb/commit/25b01dd4f08e172cae2ece25330b335ae4df023b))
 * update alpine base image to 3.24.1 ([3021ed3](https://github.com/snowdreamtech/mariadb/commit/3021ed3b4ffa5f8916f5fa46aa4325e8ebf84ba6))
 
-## [11.8.8](https://github.com/snowdreamtech/mariadb/compare/alpine-v11.8.8...alpine-v11.8.8) (2026-06-24)
-
-
-### 🐛 Bug Fixes
-
-* resolve infinite loop in mariadb-custom-installation do_query ([3f4365d](https://github.com/snowdreamtech/mariadb/commit/3f4365d48b70f8a4221552a1e255d43428561c4a))
-
-
-### ♻️ Miscellaneous Chores
-
-* fix formatting and shellcheck warnings ([8b49b6f](https://github.com/snowdreamtech/mariadb/commit/8b49b6f8ec05953dde950f59d191e061f4dbff3a))

@@ -28,14 +28,3 @@
 * sync debian build matrix and documentation with upstream ([0d6e613](https://github.com/snowdreamtech/mariadb/commit/0d6e6132c84a368f5b64b9144d9c7d3b7292d746))
 * update debian base image to 13.6.0 ([5f885d5](https://github.com/snowdreamtech/mariadb/commit/5f885d5a771f06d449533f2f3c619d27444822f5))
 
-## [11.8.6](https://github.com/snowdreamtech/mariadb/compare/debian-v11.8.6...debian-v11.8.6) (2026-06-24)
-
-
-### 🐛 Bug Fixes
-
-* resolve infinite loop in mariadb-custom-installation do_query ([3f4365d](https://github.com/snowdreamtech/mariadb/commit/3f4365d48b70f8a4221552a1e255d43428561c4a))
-
-
-### ♻️ Miscellaneous Chores
-
-* fix formatting and shellcheck warnings ([8b49b6f](https://github.com/snowdreamtech/mariadb/commit/8b49b6f8ec05953dde950f59d191e061f4dbff3a))
