@@ -1,22 +1,22 @@
-# Base
+# MariaDB
 
-[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/ci.yml?branch=main&label=CI%20Pipeline)](https://github.com/snowdreamtech/base/actions/workflows/ci.yml)
-[![CD Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/cd.yml?branch=main&label=CD%20Pipeline)](https://github.com/snowdreamtech/base/actions/workflows/cd.yml)
-[![CodeQL](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/codeql.yml?branch=main&label=CodeQL&logo=github)](https://github.com/snowdreamtech/base/actions/workflows/codeql.yml)
-[![Security Audit](https://img.shields.io/badge/Security-Zizmor%20%7C%20Trivy%20%7C%20Gitleaks-brightgreen)](https://github.com/snowdreamtech/base/actions/workflows/ci.yml)
+[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/mariadb/ci.yml?branch=main&label=CI%20Pipeline)](https://github.com/snowdreamtech/mariadb/actions/workflows/ci.yml)
+[![CD Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/mariadb/cd.yml?branch=main&label=CD%20Pipeline)](https://github.com/snowdreamtech/mariadb/actions/workflows/cd.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/snowdreamtech/mariadb/codeql.yml?branch=main&label=CodeQL&logo=github)](https://github.com/snowdreamtech/mariadb/actions/workflows/codeql.yml)
+[![Security Audit](https://img.shields.io/badge/Security-Zizmor%20%7C%20Trivy%20%7C%20Gitleaks-brightgreen)](https://github.com/snowdreamtech/mariadb/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/MIT)
-![Docker Image Version](https://img.shields.io/docker/v/snowdreamtech/base)
-![Docker Image Size](https://img.shields.io/docker/image-size/snowdreamtech/base/latest)
-![Docker Pulls](https://img.shields.io/docker/pulls/snowdreamtech/base)
-![Docker Stars](https://img.shields.io/docker/stars/snowdreamtech/base)
+![Docker Image Version](https://img.shields.io/docker/v/snowdreamtech/mariadb)
+![Docker Image Size](https://img.shields.io/docker/image-size/snowdreamtech/mariadb/latest)
+![Docker Pulls](https://img.shields.io/docker/pulls/snowdreamtech/mariadb)
+![Docker Stars](https://img.shields.io/docker/stars/snowdreamtech/mariadb)
 
 [English](README.md) | [简体中文](README_zh-CN.md)
 
-Docker base template providing standardized container foundations with flexible entrypoint systems, multi-architecture support, and consistent configuration patterns across Alpine, Debian, and Rocky Linux distributions.
+Docker image for MariaDB providing standardized container foundations with flexible entrypoint systems, multi-architecture support, and consistent configuration patterns across Alpine, Debian, and Rocky Linux distributions.
 
 ## Overview
 
-The Docker base template serves as a foundational starting point for building containerized applications. It provides:
+The MariaDB container provides:
 
 - **Standardized Dockerfiles** with OCI annotations and best practices
 - **Flexible entrypoint system** supporting custom initialization scripts
@@ -29,8 +29,8 @@ The Docker base template serves as a foundational starting point for building co
 
 ```bash
 # Pull and run the default Debian variant
-docker pull snowdreamtech/base:debian
-docker run -d --name=base -e TZ=Asia/Shanghai snowdreamtech/base:debian
+docker pull snowdreamtech/mariadb:debian
+docker run -d --name=mariadb -p 3306:3306 -e TZ=Asia/Shanghai snowdreamtech/mariadb:debian
 
 # Or use docker compose
 docker compose up -d
@@ -44,15 +44,16 @@ The recommended variant for most use cases, providing wide compatibility and ext
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
+  -p 3306:3306 \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:debian
+  snowdreamtech/mariadb:debian
 ```
 
 **Supported Architectures**: amd64, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/debian:latest`
+**Base Image**: `snowdreamtech/debian:13.6.0`
 
 ### Alpine
 
@@ -60,15 +61,16 @@ Lightweight variant optimized for minimal image size and fast startup times.
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
+  -p 3306:3306 \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:alpine
+  snowdreamtech/mariadb:alpine
 ```
 
-**Supported Architectures**: i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x
+**Supported Architectures**: 386, amd64, arm/v6, arm/v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/alpine:latest`
+**Base Image**: `snowdreamtech/alpine:3.24.1`
 
 ### Rocky
 
@@ -76,15 +78,16 @@ Enterprise-focused variant based on Rocky Linux, ideal for production environmen
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
+  -p 3306:3306 \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:rocky
+  snowdreamtech/mariadb:rocky
 ```
 
-**Supported Architectures**: i386, amd64, arm32v5, arm32v7, arm64, ppc64le, riscv64, s390x
+**Supported Architectures**: amd64, arm64, ppc64le, s390x
 
-**Base Image**: `snowdreamtech/rocky:latest`
+**Base Image**: `snowdreamtech/rocky:10.2.0`
 
 ## Build Instructions
 
@@ -92,13 +95,13 @@ docker run -d \
 
 ```bash
 # Build Debian variant
-docker build -t snowdreamtech/base:debian ./docker/debian/
+docker build -t snowdreamtech/mariadb:debian ./docker/debian/
 
 # Build Alpine variant
-docker build -t snowdreamtech/base:alpine ./docker/alpine/
+docker build -t snowdreamtech/mariadb:alpine ./docker/alpine/
 
 # Build Rocky variant
-docker build -t snowdreamtech/base:rocky ./docker/rocky/
+docker build -t snowdreamtech/mariadb:rocky ./docker/rocky/
 ```
 
 ### Multi-Architecture Build
@@ -111,22 +114,22 @@ docker buildx create --use --name build --node build --driver-opt network=host
 
 # Build Debian for multiple architectures
 docker buildx build \
-  --platform=linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x \
-  -t snowdreamtech/base:debian \
+  --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x \
+  -t snowdreamtech/mariadb:debian \
   ./docker/debian/ \
   --push
 
 # Build Alpine for multiple architectures
 docker buildx build \
   --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x \
-  -t snowdreamtech/base:alpine \
+  -t snowdreamtech/mariadb:alpine \
   ./docker/alpine/ \
   --push
 
 # Build Rocky for multiple architectures
 docker buildx build \
   --platform=linux/amd64,linux/arm64,linux/ppc64le,linux/s390x \
-  -t snowdreamtech/base:rocky \
+  -t snowdreamtech/mariadb:rocky \
   ./docker/rocky/ \
   --push
 ```
@@ -135,24 +138,28 @@ docker buildx build \
 
 All variants support the following environment variables for runtime configuration:
 
-| Variable               | Default   | Description                                              |
-| ---------------------- | --------- | -------------------------------------------------------- |
-| `KEEPALIVE`            | `0`       | Keep container running (1=enabled, 0=disabled)           |
-| `CAP_NET_BIND_SERVICE` | `0`       | Enable binding to privileged ports (<1024)               |
-| `LANG`                 | `C.UTF-8` | Locale setting for UTF-8 character support               |
-| `UMASK`                | `022`     | Default file creation mask                               |
-| `DEBUG`                | `false`   | Enable debug output in entrypoint scripts                |
-| `PASSWORDLESS_SUDO`    | `false`   | Enable passwordless sudo for non-root users (true/false) |
-| `PGID`                 | `0`       | Primary group ID for custom user creation                |
-| `PUID`                 | `0`       | User ID for custom user creation                         |
-| `USER`                 | `root`    | Username for custom user creation                        |
-| `WORKDIR`              | `/root`   | Working directory path                                   |
-| `TZ`                   | -         | Timezone (e.g., `Asia/Shanghai`, `America/New_York`)     |
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `KEEPALIVE` | `1` | Keep container running (1=enabled, 0=disabled) |
+| `CAP_NET_BIND_SERVICE` | `0` | Enable binding to privileged ports (<1024) |
+| `LANG` | `C.UTF-8` | Locale setting for UTF-8 character support |
+| `UMASK` | `022` | Default file creation mask |
+| `DEBUG` | `false` | Enable debug output in entrypoint scripts |
+| `PGID` | `0` | Primary group ID for custom user creation |
+| `PUID` | `0` | User ID for custom user creation |
+| `USER` | `root` | Username for custom user creation |
+| `WORKDIR` | `/root` | Working directory path |
+| `TZ` | - | Timezone (e.g., `Asia/Shanghai`, `America/New_York`) |
+| `MARIADB_ROOT_PWD` | - | Password for MariaDB root user (auto-generated if unset) |
+| `MARIADB_PORT` | `3306` | Custom port for MariaDB server to listen on |
+| `DISALLOW_ROOT_LOGIN_REMOTELY` | `1` | Prevent remote root login (1=enabled, 0=disabled) |
+| `DISALLOW_USER_LOGIN_REMOTELY` | `1` | Prevent remote user login (1=enabled, 0=disabled) |
+| `REMOVE_ANONYMOUS_USERS` | `1` | Remove anonymous users during initialization (1=enabled, 0=disabled) |
 
 **Debian-specific**:
 
-| Variable          | Default          | Description                      |
-| ----------------- | ---------------- | -------------------------------- |
+| Variable | Default | Description |
+|----------|---------|-------------|
 | `DEBIAN_FRONTEND` | `noninteractive` | Debian package installation mode |
 
 ### Custom User Creation
@@ -164,19 +171,19 @@ docker build \
   --build-arg PUID=1000 \
   --build-arg PGID=1000 \
   --build-arg USER=appuser \
-  -t snowdreamtech/base:debian-custom \
+  -t snowdreamtech/mariadb:debian-custom \
   ./docker/debian/
 ```
 
-Or at runtime (requires rebuilding the image):
+Or at runtime:
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=mariadb \
   -e PUID=1000 \
   -e PGID=1000 \
   -e USER=appuser \
-  snowdreamtech/base:debian
+  snowdreamtech/mariadb:debian
 ```
 
 **Note**: User creation only occurs when `PUID≠0`, `PGID≠0`, and `USER≠root`.
@@ -187,9 +194,11 @@ docker run -d \
 
 ```yaml
 services:
-  base:
-    image: snowdreamtech/base:debian
-    container_name: base
+  mariadb:
+    image: snowdreamtech/mariadb:debian
+    container_name: mariadb
+    ports:
+      - "3306:3306"
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
@@ -199,15 +208,18 @@ services:
 
 ```yaml
 services:
-  base:
-    image: snowdreamtech/base:debian
-    container_name: base
+  mariadb:
+    image: snowdreamtech/mariadb:debian
+    container_name: mariadb
+    ports:
+      - "3306:3306"
     environment:
       - TZ=Asia/Shanghai
       - DEBUG=true
       - KEEPALIVE=1
+      - MARIADB_ROOT_PWD=my_secret_password
     volumes:
-      - /path/to/data:/data
+      - /path/to/data:/var/lib/mysql
     restart: unless-stopped
 ```
 
@@ -217,9 +229,9 @@ Images follow semantic versioning with the format: `{major}.{minor}.{patch}-{var
 
 Examples:
 
-- `snowdreamtech/base:<version>-debian`
-- `snowdreamtech/base:<version>-alpine`
-- `snowdreamtech/base:<version>-rocky`
+- `snowdreamtech/mariadb:11.8.6-debian`
+- `snowdreamtech/mariadb:11.8.9-alpine`
+- `snowdreamtech/mariadb:11.8.8-rocky`
 
 This format allows:
 
@@ -231,11 +243,11 @@ This format allows:
 
 Each distribution variant supports multiple CPU architectures for deployment across diverse hardware platforms:
 
-| Variant    | Architectures                                                 |
-| ---------- | ------------------------------------------------------------- |
-| **Debian** | amd64, arm32v7, arm64, ppc64le, riscv64, s390x                |
-| **Alpine** | i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x |
-| **Rocky**  | amd64, arm64, ppc64le, s390x                                  |
+| Variant | Architectures |
+|---------|---------------|
+| **Debian** | amd64, arm32v7, arm64, ppc64le, riscv64, s390x |
+| **Alpine** | 386, amd64, arm/v6, arm/v7, arm64, ppc64le, riscv64, s390x |
+| **Rocky** | amd64, arm64, ppc64le, s390x |
 
 Docker automatically selects the appropriate architecture for your platform when pulling images.
 
@@ -255,7 +267,7 @@ The base template includes a flexible entrypoint system that executes custom ini
 Create custom initialization scripts in your derived Dockerfile:
 
 ```dockerfile
-FROM snowdreamtech/base:debian
+FROM snowdreamtech/mariadb:debian
 
 # Add your custom initialization script
 COPY my-init.sh /usr/local/bin/entrypoint.d/20-my-init.sh
@@ -271,79 +283,15 @@ CMD ["/app/start.sh"]
 Enable debug output to troubleshoot entrypoint execution:
 
 ```bash
-docker run -e DEBUG=true snowdreamtech/base:debian
+docker run -e DEBUG=true snowdreamtech/mariadb:debian
 ```
 
-Output example:
+## Contact (备注：mariadb)
 
-```
-→ [ENTRYPOINT] Executing all scripts in /usr/local/bin/entrypoint.d
-→ Running /usr/local/bin/entrypoint.d/10-base-init.sh
-→ [ENTRYPOINT] Done.
-```
-
-## Development
-
-### Prerequisites
-
-- Docker (>= 20.10) with Docker Buildx plugin
-- [UniRTM](https://github.com/snowdreamtech/UniRTM) for workspace quality guard and toolchain management
-
-### Quality & Verification
-
-```bash
-# Setup toolchain and verify environment
-unirtm run setup
-
-# Run comprehensive workspace quality check (formatters, linters, security)
-unirtm run verify
-
-# Run security audits (Zizmor, Gitleaks, OSV-Scanner, Trivy)
-unirtm run audit
-
-# Automatically fix linting and formatting issues where supported
-unirtm run fix
-```
-
-### Building Locally
-
-```bash
-# Build specific variant
-docker build -t base:debian ./docker/debian/
-docker build -t base:alpine ./docker/alpine/
-docker build -t base:rocky ./docker/rocky/
-```
-
-### Testing
-
-```bash
-# Test default configuration
-docker run --rm base:debian id
-
-# Test custom user creation
-docker build --build-arg PUID=1000 --build-arg PGID=1000 --build-arg USER=testuser -t base:debian-test ./docker/debian/
-docker run --rm base:debian-test id
-# Expected: uid=1000(testuser) gid=1000(testuser)
-
-# Test DEBUG mode
-docker run --rm -e DEBUG=true base:debian
-```
-
-## Reference
-
-1. [使用 buildx 构建多平台 Docker 镜像](https://icloudnative.io/posts/multiarch-docker-with-buildx/)
-2. [如何使用 docker buildx 构建跨平台 Go 镜像](https://waynerv.com/posts/building-multi-architecture-images-with-docker-buildx/#buildx-%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%9E%84%E5%BB%BA%E7%AD%96%E7%95%A5)
-3. [Building Multi-Arch Images for Arm and x86 with Docker Desktop](https://www.docker.com/blog/multi-arch-images/)
-4. [How to Rapidly Build Multi-Architecture Images with Buildx](https://www.docker.com/blog/how-to-rapidly-build-multi-architecture-images-with-buildx/)
-5. [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
-6. [docker/buildx](https://github.com/docker/buildx)
-
-## Contact (备注：base)
-
-- Email: <sn0wdr1am@qq.com>
-- QQ: 3217680847
-- QQ群: 949022145
-- WeChat/微信群: sn0wdr1am
+* Email: <sn0wdr1am@qq.com>
+* QQ: 3217680847
+* QQ群: 949022145
+* WeChat/微信群: sn0wdr1am
 
 ## License
 

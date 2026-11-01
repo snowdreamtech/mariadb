@@ -1,10 +1,10 @@
 # Docker Image Tags Reference
 
-This document describes the Docker image tagging strategy for the base template project.
+This document describes the Docker image tagging strategy for the MariaDB project.
 
 ## Tag Naming Convention
 
-All images use the format: `snowdreamtech/base:TAG`
+All images use the format: `snowdreamtech/mariadb:TAG`
 
 Where `TAG` follows these patterns:
 
@@ -15,8 +15,8 @@ Where `TAG` follows these patterns:
 
 All tags are pushed to three registries:
 
-- **DockerHub**: `snowdreamtech/base:TAG`
-- **GitHub Container Registry**: `ghcr.io/snowdreamtech/base:TAG`
+- **DockerHub**: `snowdreamtech/mariadb:TAG`
+- **GitHub Container Registry**: `ghcr.io/snowdreamtech/mariadb:TAG`
 
 ## Tag Scenarios
 
@@ -31,10 +31,10 @@ git push origin dev
 **Generated tags:**
 
 ```
-snowdreamtech/base:dev-alpine
-snowdreamtech/base:dev-debian
-snowdreamtech/base:dev              # ← Debian (default)
-snowdreamtech/base:dev-rocky
+snowdreamtech/mariadb:dev-alpine
+snowdreamtech/mariadb:dev-debian
+snowdreamtech/mariadb:dev              # ← Debian (default)
+snowdreamtech/mariadb:dev-rocky
 ```
 
 #### Push to `main` branch
@@ -46,14 +46,14 @@ git push origin main
 **Generated tags:**
 
 ```
-snowdreamtech/base:main-alpine
-snowdreamtech/base:latest-alpine
-snowdreamtech/base:main-debian
-snowdreamtech/base:latest-debian
-snowdreamtech/base:main             # ← Debian (default)
-snowdreamtech/base:latest           # ← Debian (default)
-snowdreamtech/base:main-rocky
-snowdreamtech/base:latest-rocky
+snowdreamtech/mariadb:main-alpine
+snowdreamtech/mariadb:latest-alpine
+snowdreamtech/mariadb:main-debian
+snowdreamtech/mariadb:latest-debian
+snowdreamtech/mariadb:main             # ← Debian (default)
+snowdreamtech/mariadb:latest           # ← Debian (default)
+snowdreamtech/mariadb:main-rocky
+snowdreamtech/mariadb:latest-rocky
 ```
 
 ---
@@ -70,8 +70,8 @@ git push origin alpine-v3.23.4
 **Generated tags:**
 
 ```
-snowdreamtech/base:3.23.4-alpine
-snowdreamtech/base:latest-alpine
+snowdreamtech/mariadb:3.23.4-alpine
+snowdreamtech/mariadb:latest-alpine
 ```
 
 #### Debian Release
@@ -84,10 +84,10 @@ git push origin debian-v13.4.0
 **Generated tags:**
 
 ```
-snowdreamtech/base:13.4.0-debian
-snowdreamtech/base:latest-debian
-snowdreamtech/base:13.4.0           # ← Debian (default)
-snowdreamtech/base:latest           # ← Debian (default)
+snowdreamtech/mariadb:13.4.0-debian
+snowdreamtech/mariadb:latest-debian
+snowdreamtech/mariadb:13.4.0           # ← Debian (default)
+snowdreamtech/mariadb:latest           # ← Debian (default)
 ```
 
 #### Rocky Release
@@ -100,8 +100,8 @@ git push origin rocky-v10.1.0
 **Generated tags:**
 
 ```
-snowdreamtech/base:10.1.0-rocky
-snowdreamtech/base:latest-rocky
+snowdreamtech/mariadb:10.1.0-rocky
+snowdreamtech/mariadb:latest-rocky
 ```
 
 ---
@@ -114,18 +114,18 @@ snowdreamtech/base:latest-rocky
 
 ```
 # Alpine
-snowdreamtech/base:nightly-alpine
-snowdreamtech/base:20260427-alpine
+snowdreamtech/mariadb:nightly-alpine
+snowdreamtech/mariadb:20260427-alpine
 
 # Debian (with default tags)
-snowdreamtech/base:nightly-debian
-snowdreamtech/base:20260427-debian
-snowdreamtech/base:nightly          # ← Debian (default)
-snowdreamtech/base:20260427         # ← Debian (default)
+snowdreamtech/mariadb:nightly-debian
+snowdreamtech/mariadb:20260427-debian
+snowdreamtech/mariadb:nightly          # ← Debian (default)
+snowdreamtech/mariadb:20260427         # ← Debian (default)
 
 # Rocky
-snowdreamtech/base:nightly-rocky
-snowdreamtech/base:20260427-rocky
+snowdreamtech/mariadb:nightly-rocky
+snowdreamtech/mariadb:20260427-rocky
 ```
 
 ---
@@ -151,21 +151,21 @@ Debian is designated as the **default variant** (`is_latest: true`), which means
 ✅ **Debian gets BOTH suffixed AND unsuffixed tags:**
 
 ```
-snowdreamtech/base:nightly-debian   # Variant-specific
-snowdreamtech/base:nightly          # Default (no suffix)
+snowdreamtech/mariadb:nightly-debian   # Variant-specific
+snowdreamtech/mariadb:nightly          # Default (no suffix)
 
-snowdreamtech/base:13.4.0-debian    # Variant-specific
-snowdreamtech/base:13.4.0           # Default (no suffix)
+snowdreamtech/mariadb:13.4.0-debian    # Variant-specific
+snowdreamtech/mariadb:13.4.0           # Default (no suffix)
 
-snowdreamtech/base:latest-debian    # Variant-specific
-snowdreamtech/base:latest           # Default (no suffix)
+snowdreamtech/mariadb:latest-debian    # Variant-specific
+snowdreamtech/mariadb:latest           # Default (no suffix)
 ```
 
 ❌ **Alpine and Rocky get ONLY suffixed tags:**
 
 ```
-snowdreamtech/base:nightly-alpine   # Variant-specific only
-snowdreamtech/base:nightly-rocky    # Variant-specific only
+snowdreamtech/mariadb:nightly-alpine   # Variant-specific only
+snowdreamtech/mariadb:nightly-rocky    # Variant-specific only
 ```
 
 ---
@@ -175,49 +175,49 @@ snowdreamtech/base:nightly-rocky    # Variant-specific only
 ### Pull the latest Debian image (default)
 
 ```bash
-docker pull snowdreamtech/base:latest
+docker pull snowdreamtech/mariadb:latest
 # or
-docker pull snowdreamtech/base:latest-debian
+docker pull snowdreamtech/mariadb:latest-debian
 ```
 
 ### Pull the latest Alpine image
 
 ```bash
-docker pull snowdreamtech/base:latest-alpine
+docker pull snowdreamtech/mariadb:latest-alpine
 ```
 
 ### Pull the latest Rocky image
 
 ```bash
-docker pull snowdreamtech/base:latest-rocky
+docker pull snowdreamtech/mariadb:latest-rocky
 ```
 
 ### Pull a specific version
 
 ```bash
 # Alpine 3.23.4
-docker pull snowdreamtech/base:3.23.4-alpine
+docker pull snowdreamtech/mariadb:3.23.4-alpine
 
 # Debian 13.4.0 (two ways)
-docker pull snowdreamtech/base:13.4.0-debian
-docker pull snowdreamtech/base:13.4.0
+docker pull snowdreamtech/mariadb:13.4.0-debian
+docker pull snowdreamtech/mariadb:13.4.0
 
 # Rocky 10.1.0
-docker pull snowdreamtech/base:10.1.0-rocky
+docker pull snowdreamtech/mariadb:10.1.0-rocky
 ```
 
 ### Pull nightly builds
 
 ```bash
 # Alpine nightly
-docker pull snowdreamtech/base:nightly-alpine
+docker pull snowdreamtech/mariadb:nightly-alpine
 
 # Debian nightly (two ways)
-docker pull snowdreamtech/base:nightly-debian
-docker pull snowdreamtech/base:nightly
+docker pull snowdreamtech/mariadb:nightly-debian
+docker pull snowdreamtech/mariadb:nightly
 
 # Rocky nightly
-docker pull snowdreamtech/base:nightly-rocky
+docker pull snowdreamtech/mariadb:nightly-rocky
 ```
 
 ---
@@ -227,9 +227,9 @@ docker pull snowdreamtech/base:nightly-rocky
 ### Development Flow
 
 ```
-1. Push to dev → base:dev-alpine, base:dev-debian, base:dev, base:dev-rocky
-2. Push to main → base:main-alpine, base:latest-alpine, base:main-debian, base:latest-debian, base:main, base:latest, base:main-rocky, base:latest-rocky
-3. Create tag → base:VERSION-variant, base:latest-variant (+ unsuffixed for Debian)
+1. Push to dev → mariadb:dev-alpine, mariadb:dev-debian, mariadb:dev, mariadb:dev-rocky
+2. Push to main → mariadb:main-alpine, mariadb:latest-alpine, mariadb:main-debian, mariadb:latest-debian, mariadb:main, mariadb:latest, mariadb:main-rocky, mariadb:latest-rocky
+3. Create tag → mariadb:VERSION-variant, mariadb:latest-variant (+ unsuffixed for Debian)
 ```
 
 ### Release Flow (with Release Please)
@@ -272,8 +272,8 @@ The key configuration that enables this tagging strategy:
 
 ```yaml
 images: |
-  name=snowdreamtech/base,enable=true
-  name=ghcr.io/snowdreamtech/base,enable=true
+  name=snowdreamtech/mariadb,enable=true
+  name=ghcr.io/snowdreamtech/mariadb,enable=true
 flavor: |
   latest=false
   prefix=

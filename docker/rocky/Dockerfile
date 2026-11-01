@@ -1,16 +1,16 @@
-# Base Image (Rocky Variant)
+# MariaDB Image (Rocky Variant)
 # Extends snowdreamtech/rocky with additional tooling and configuration.
 
 FROM ghcr.io/snowdreamtech/rocky:10.2.0
 
 # Build-time Configuration
 # x-release-please-start-version
-ARG VERSION="10.2.0"
+ARG VERSION="11.8.8"
 # x-release-please-end
 
 ARG BUILDTIME \
     REVISION \
-    KEEPALIVE=0 \
+    KEEPALIVE=1 \
     CAP_NET_BIND_SERVICE=0 \
     LANG=C.UTF-8 \
     UMASK=022 \
@@ -19,21 +19,22 @@ ARG BUILDTIME \
     PGID=0 \
     PUID=0 \
     USER=root \
-    WORKDIR=/root
+    WORKDIR=/root \
+    MARIADB_VERSION=11.8.8-2.el10_2
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
-    org.opencontainers.image.title="Base Image Based On Rocky" \
-    org.opencontainers.image.description="Docker Images for Base on Rocky. (amd64, arm64, ppc64le, s390x)" \
-    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/base" \
-    org.opencontainers.image.base.name="snowdreamtech/base:rocky" \
+    org.opencontainers.image.title="MariaDB Image Based On Rocky" \
+    org.opencontainers.image.description="Docker Images for MariaDB on Rocky. (amd64, arm64, ppc64le, s390x)" \
+    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/mariadb" \
+    org.opencontainers.image.base.name="ghcr.io/snowdreamtech/rocky:10.2.0" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.source="https://github.com/snowdreamtech/base" \
+    org.opencontainers.image.source="https://github.com/snowdreamtech/mariadb" \
     org.opencontainers.image.vendor="Snowdream Tech" \
     org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
-    org.opencontainers.image.url="https://github.com/snowdreamtech/base"
+    org.opencontainers.image.url="https://github.com/snowdreamtech/mariadb"
 
 # Runtime Environment Configuration
 ENV KEEPALIVE=${KEEPALIVE} \
@@ -45,13 +46,16 @@ ENV KEEPALIVE=${KEEPALIVE} \
     PGID=${PGID} \
     PUID=${PUID} \
     USER=${USER} \
-    WORKDIR=${WORKDIR}
+    WORKDIR=${WORKDIR} \
+    MARIADB_VERSION=${MARIADB_VERSION}
 
-# Additional tooling and configuration for Base image
+# Additional tooling and configuration for MariaDB image
 RUN set -eux \
     && dnf -y --allowerasing --setopt=*.skip_if_unavailable=true update \
     && dnf -y --allowerasing --setopt=*.skip_if_unavailable=true install \
-    vim-enhanced \
+    expect \
+    openssl \
+    mariadb11.8-server-${MARIADB_VERSION} \
     && dnf -y --allowerasing autoremove \
     && dnf -y --allowerasing clean all \
     && rm -rf /var/cache/dnf \
@@ -59,14 +63,19 @@ RUN set -eux \
     && rm -rf /var/tmp/*
 
 # Container Orchestration Files
+COPY mariadb-custom-installation /usr/local/bin/mariadb-custom-installation
+COPY mariadb-setup /usr/local/bin/mariadb-setup
 COPY entrypoint.d /usr/local/bin/entrypoint.d
 
-RUN chmod +x /usr/local/bin/entrypoint.d/*
+RUN chmod +x /usr/local/bin/mariadb-custom-installation \
+    && chmod +x /usr/local/bin/mariadb-setup \
+    && chmod +x /usr/local/bin/entrypoint.d/*
 
 # Standard Healthcheck (Verification of core system responsiveness)
 HEALTHCHECK NONE
 
 # Process Execution
+EXPOSE 3306
 USER root
 WORKDIR /root
 ENTRYPOINT ["docker-entrypoint.sh"]
