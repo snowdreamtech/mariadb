@@ -1,5 +1,19 @@
 # Changelog
 
+## [11.8.9](https://github.com/snowdreamtech/mariadb/compare/alpine-v11.8.9...alpine-v11.8.9) (2026-11-01)
+
+
+### 🚀 Features
+
+* align repository structure with base dev and upgrade alpine to 11.8.9 ([48f0baa](https://github.com/snowdreamtech/mariadb/commit/48f0baadba658daf2025cf0fa341f70e7416446f))
+* initial release of snowdreamtech base docker images powered by unirtm ([25f55c8](https://github.com/snowdreamtech/mariadb/commit/25f55c84e8fba977d226739e9871d61e1428fdeb))
+
+
+### ♻️ Miscellaneous Chores
+
+* release main ([a2cafdc](https://github.com/snowdreamtech/mariadb/commit/a2cafdc012ed85559e0239e6333af767a878eff8))
+* **release:** deduplicate CHANGELOG headers ([ec1c2ef](https://github.com/snowdreamtech/mariadb/commit/ec1c2ef80d3e6af152487494cd1727eaf502214b))
+
 ## [11.8.8](https://github.com/snowdreamtech/mariadb/compare/alpine-v11.8.8...alpine-v11.8.8) (2026-08-13)
 
 
@@ -22,4 +36,3 @@
 * **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/mariadb/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
 * smart merge upstream/dev into dev and update MariaDB package versions ([25b01dd](https://github.com/snowdreamtech/mariadb/commit/25b01dd4f08e172cae2ece25330b335ae4df023b))
 * update alpine base image to 3.24.1 ([3021ed3](https://github.com/snowdreamtech/mariadb/commit/3021ed3b4ffa5f8916f5fa46aa4325e8ebf84ba6))
-
