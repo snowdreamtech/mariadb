@@ -24,6 +24,7 @@ The MariaDB container provides:
 - **Multi-architecture support** for diverse hardware platforms
 - **User/group management** with PUID/PGID support for permission handling
 - **Three distribution variants**: Alpine (lightweight), Debian (default/widely-compatible), Rocky (enterprise)
+- **Image aliases**: Also published under `snowdreamtech/mysql` and `ghcr.io/snowdreamtech/mysql`
 
 ## Quick Start
 

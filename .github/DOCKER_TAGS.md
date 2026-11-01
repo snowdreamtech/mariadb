@@ -4,7 +4,7 @@ This document describes the Docker image tagging strategy for the MariaDB projec
 
 ## Tag Naming Convention
 
-All images use the format: `snowdreamtech/mariadb:TAG`
+All images use the format: `snowdreamtech/mariadb:TAG` (or alias `snowdreamtech/mysql:TAG`)
 
 Where `TAG` follows these patterns:
 
@@ -13,10 +13,10 @@ Where `TAG` follows these patterns:
 
 ## Supported Registries
 
-All tags are pushed to three registries:
+All tags are pushed to two registries:
 
-- **DockerHub**: `snowdreamtech/mariadb:TAG`
-- **GitHub Container Registry**: `ghcr.io/snowdreamtech/mariadb:TAG`
+- **GitHub Container Registry**: `ghcr.io/snowdreamtech/mariadb:TAG` (and alias `ghcr.io/snowdreamtech/mysql:TAG`)
+- **DockerHub**: `snowdreamtech/mariadb:TAG` (and alias `snowdreamtech/mysql:TAG`)
 
 ## Tag Scenarios
 

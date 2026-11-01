@@ -24,6 +24,7 @@ MariaDB 容器镜像提供：
 - **多架构支持**，适配多样化的硬件平台
 - **用户/组管理**，支持 PUID/PGID 权限处理
 - **三种发行版变体**：Alpine（轻量级）、Debian（默认/高兼容性）、Rocky（企业级）
+- **镜像别名**：同时发布至 `snowdreamtech/mysql` 与 `ghcr.io/snowdreamtech/mysql` 别名仓库
 
 ## 快速上手
 

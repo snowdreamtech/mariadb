@@ -266,6 +266,8 @@ jobs:
           images: |
             name=ghcr.io/snowdreamtech/mariadb,enable=true
             name=snowdreamtech/mariadb,enable=true
+            name=ghcr.io/snowdreamtech/mysql,enable=true
+            name=snowdreamtech/mysql,enable=true
           flavor: |
             latest=false
             prefix=
